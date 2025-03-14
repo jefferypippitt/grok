@@ -157,7 +157,7 @@ export function Chatbot() {
                     <div className={`max-w-[85%] flex-1 sm:max-w-[75%] ${isAssistant ? 'flex flex-col gap-2' : ''}`}>
                       {isAssistant ? (
                         <>
-                          <div className="bg-secondary text-foreground prose rounded-lg p-2">
+                          <div className="text-foreground prose rounded-lg p-2">
                             <Markdown>{message.content}</Markdown>
                           </div>
                           <MessageActions className="self-end">
@@ -196,7 +196,7 @@ export function Chatbot() {
                           </MessageActions>
                         </>
                       ) : (
-                        <MessageContent className="bg-primary text-primary-foreground">
+                        <MessageContent className="bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100">
                           {message.content}
                         </MessageContent>
                       )}
@@ -213,7 +213,7 @@ export function Chatbot() {
                     fallback="Grok"
                   />
                   <div className="max-w-[85%] flex-1 sm:max-w-[75%]">
-                    <div className="bg-secondary text-foreground prose rounded-lg p-4 flex items-center">
+                    <div className="text-foreground prose rounded-lg p-4 flex items-center">
                       <Loader variant="text-shimmer" text="Thinking..." size="md" />
                     </div>
                   </div>
@@ -240,7 +240,7 @@ export function Chatbot() {
             onSubmit={handleSubmitMessage}
           >
             <PromptInputTextarea placeholder="Ask Grok anything..." />
-            <PromptInputActions className="justify-end pt-2">
+            <PromptInputActions className="justify-end">
               <PromptInputAction
                 tooltip={isLoading ? 'Stop generation' : 'Send message'}
               >
@@ -248,13 +248,13 @@ export function Chatbot() {
                   type={isLoading ? "button" : "submit"}
                   variant="default"
                   size="icon"
-                  className="h-8 w-8 rounded-full"
+                  className="h-8 w-8 rounded-full shadow-md hover:shadow-lg transition-all"
                   onClick={isLoading ? handleStopGeneration : undefined}
                 >
                   {isLoading ? (
-                    <Square className="size-5 fill-current" />
+                    <Square className="size-4 fill-current" />
                   ) : (
-                    <ArrowUp className="size-5" />
+                    <ArrowUp className="size-4" />
                   )}
                 </Button>
               </PromptInputAction>

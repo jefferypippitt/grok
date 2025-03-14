@@ -81,11 +81,13 @@ function PromptInput({
       >
         <div
           className={cn(
-            "border-input bg-background rounded-3xl border p-2 shadow-xs",
+            "border-input bg-background rounded-3xl border relative overflow-hidden shadow-xs transition-all duration-200 focus-within:border-primary/70 focus-within:ring-3 focus-within:ring-primary/30 focus-within:shadow-[0_0_15px_rgba(var(--primary-rgb),0.5)] before:content-[''] before:absolute before:inset-0 before:rounded-3xl before:bg-transparent focus-within:before:bg-primary/15 dark:focus-within:before:bg-primary/20 before:transition-all before:duration-200 before:z-0 p-2",
             className
           )}
         >
-          {children}
+          <div className="relative z-10">
+            {children}
+          </div>
         </div>
       </PromptInputContext.Provider>
     </TooltipProvider>
@@ -131,7 +133,7 @@ function PromptInputTextarea({
       onChange={(e) => setValue(e.target.value)}
       onKeyDown={handleKeyDown}
       className={cn(
-        "text-primary min-h-[44px] w-full resize-none border-none bg-transparent dark:bg-transparent shadow-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0",
+        "text-primary min-h-[44px] w-full resize-none border-none bg-transparent dark:bg-transparent shadow-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0 transition-all duration-200 focus:text-primary px-3 py-2 pr-10 m-0",
         className
       )}
       rows={1}
@@ -149,7 +151,7 @@ function PromptInputActions({
   ...props
 }: PromptInputActionsProps) {
   return (
-    <div className={cn("flex items-center gap-2", className)} {...props}>
+    <div className={cn("flex items-center gap-2 absolute right-3 bottom-3 z-20", className)} {...props}>
       {children}
     </div>
   )
