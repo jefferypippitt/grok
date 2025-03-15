@@ -81,7 +81,7 @@ function PromptInput({
       >
         <div
           className={cn(
-            "border-input bg-background rounded-3xl border relative overflow-hidden shadow-xs transition-all duration-200 focus-within:border-primary/70 focus-within:ring-3 focus-within:ring-primary/30 focus-within:shadow-[0_0_15px_rgba(var(--primary-rgb),0.5)] before:content-[''] before:absolute before:inset-0 before:rounded-3xl before:bg-transparent focus-within:before:bg-primary/15 dark:focus-within:before:bg-primary/20 before:transition-all before:duration-200 before:z-0 p-2",
+            "border-input bg-background/50 rounded-3xl border relative overflow-hidden shadow-xs transition-all duration-200 focus-within:border-primary/50 focus-within:ring-1 focus-within:ring-primary/20 before:content-[''] before:absolute before:inset-0 before:rounded-3xl before:bg-transparent focus-within:before:bg-primary/5 dark:focus-within:before:bg-primary/10 before:transition-all before:duration-200 before:z-0 p-2",
             className
           )}
         >

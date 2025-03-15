@@ -224,8 +224,7 @@ function ChatContainer({
     scrollTriggered,
     scrollToBottom, 
     newMessageAdded, 
-    setNewMessageAdded,
-    prevChildrenCountRef
+    setNewMessageAdded
   ])
 
   return (

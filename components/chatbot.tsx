@@ -5,9 +5,9 @@ import { useChat } from 'ai/react'
 import { Button } from '@/components/ui/button'
 import { ArrowUp, Square, Copy, ThumbsDown, ThumbsUp } from 'lucide-react'
 import { PromptInput, PromptInputAction, PromptInputActions, PromptInputTextarea } from './ui/prompt-input'
+import { PromptSuggestion } from '@/components/ui/prompt-suggestion'
 import { ChatContainer } from './ui/chat-container'
 import { Message, MessageAvatar, MessageContent, MessageAction, MessageActions } from './ui/message'
-import { Markdown } from './ui/markdown'
 import { ScrollButton } from './ui/scroll-button'
 import { Loader } from './ui/loader'
 import Image from 'next/image'
@@ -42,6 +42,18 @@ export function Chatbot() {
       setWaitingForResponse(false)
     },
   })
+
+  // Suggestions data
+  const suggestions = [
+    "Tell me a joke",
+    "Fastest land animal",
+    "Longest river in the world",
+    "Largest planet in our solar system",
+  ]
+
+  const handleSuggestionClick = (suggestion: string) => {
+    handleInputChange({ target: { value: suggestion } } as React.ChangeEvent<HTMLTextAreaElement>)
+  }
 
   // Show typing indicator when loading starts but only if we're waiting for a new response
   useEffect(() => {
@@ -131,6 +143,16 @@ export function Chatbot() {
                   className="mb-2"
                 />
                 <h1 className="text-3xl font-bold tracking-tight">Grok</h1>
+                <div className="flex flex-wrap gap-2 justify-center max-w-2xl">
+                  {suggestions.map((suggestion, index) => (
+                    <PromptSuggestion
+                      key={index}
+                      onClick={() => handleSuggestionClick(suggestion)}
+                    >
+                      {suggestion}
+                    </PromptSuggestion>
+                  ))}
+                </div>
               </div>
             </div>
           ) : (
@@ -147,19 +169,18 @@ export function Chatbot() {
                       message.role === 'user' ? 'justify-end' : 'justify-start'
                     }
                   >
-                    {isAssistant && (
-                      <MessageAvatar
-                        src="/grok-logo-icon.png"
-                        alt="Grok AI Assistant"
-                        fallback="Grok"
-                      />
-                    )}
-                    <div className={`max-w-[85%] flex-1 sm:max-w-[75%] ${isAssistant ? 'flex flex-col gap-2' : ''}`}>
-                      {isAssistant ? (
-                        <>
-                          <div className="text-foreground prose text-base rounded-lg p-2">
-                            <Markdown>{message.content}</Markdown>
-                          </div>
+                    {isAssistant ? (
+                      <>
+                        <MessageAvatar
+                          src="/grok-logo-icon.png"
+                          alt="Grok AI Assistant"
+                          fallback="Grok"
+                          className="border-2 border-gray-200/50 dark:border-gray-700/50"
+                        />
+                        <div className="flex w-full flex-col gap-2">
+                          <MessageContent markdown className="bg-transparent p-0">
+                            {message.content}
+                          </MessageContent>
                           <MessageActions className="self-end">
                             <MessageAction tooltip="Copy to clipboard">
                               <Button
@@ -194,13 +215,13 @@ export function Chatbot() {
                               </Button>
                             </MessageAction>
                           </MessageActions>
-                        </>
-                      ) : (
-                        <MessageContent className="bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 text-base">
-                          {message.content}
-                        </MessageContent>
-                      )}
-                    </div>
+                        </div>
+                      </>
+                    ) : (
+                      <MessageContent className="bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100">
+                        {message.content}
+                      </MessageContent>
+                    )}
                   </Message>
                 )
               })}
