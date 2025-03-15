@@ -157,7 +157,7 @@ export function Chatbot() {
                     <div className={`max-w-[85%] flex-1 sm:max-w-[75%] ${isAssistant ? 'flex flex-col gap-2' : ''}`}>
                       {isAssistant ? (
                         <>
-                          <div className="text-foreground prose rounded-lg p-2">
+                          <div className="text-foreground prose text-base rounded-lg p-2">
                             <Markdown>{message.content}</Markdown>
                           </div>
                           <MessageActions className="self-end">
@@ -196,7 +196,7 @@ export function Chatbot() {
                           </MessageActions>
                         </>
                       ) : (
-                        <MessageContent className="bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100">
+                        <MessageContent className="bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 text-base">
                           {message.content}
                         </MessageContent>
                       )}
@@ -213,7 +213,7 @@ export function Chatbot() {
                     fallback="Grok"
                   />
                   <div className="max-w-[85%] flex-1 sm:max-w-[75%]">
-                    <div className="text-foreground prose rounded-lg p-4 flex items-center">
+                    <div className="text-foreground prose text-base rounded-lg p-4 flex items-center">
                       <Loader variant="text-shimmer" text="Thinking..." size="md" />
                     </div>
                   </div>
